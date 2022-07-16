@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +21,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -62,8 +60,7 @@ fun ContactListScreen() = RequestContactsPermission {
         }
     } else {
         LazyColumn(
-            state = rememberLazyListState(),
-            verticalArrangement = Arrangement.spacedBy(1.dp)
+            state = rememberLazyListState()
         ) {
             contactList.forEach { (letter, contactsForLetter) ->
                 stickyHeader {
@@ -89,8 +86,7 @@ private fun ContactHeader(letter: String) {
         text = letter,
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
-            .background(MaterialTheme.colors.primary.copy(alpha = .2f))
+            .background(Color.LightGray)
             .padding(horizontal = 15.dp, vertical = 5.dp),
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold
@@ -109,7 +105,7 @@ private fun ContactItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
+                .height(70.dp)
                 .padding(horizontal = 15.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -118,7 +114,7 @@ private fun ContactItem(
                 letter = contact.name.first().uppercase(),
                 backgroundColor = contact.color
             )
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(15.dp))
             Text(
                 text = contact.name,
                 fontSize = 18.sp,
@@ -141,7 +137,7 @@ private fun ContactItem(
                     tint = Color.DarkGray
                 )
             }
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Icon(
                 imageVector = Icons.Filled.Star,
                 contentDescription = "starred icon",
